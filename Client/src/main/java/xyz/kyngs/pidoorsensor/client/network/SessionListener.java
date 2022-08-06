@@ -4,11 +4,13 @@ import com.github.steveice10.packetlib.event.session.DisconnectedEvent;
 import com.github.steveice10.packetlib.event.session.PacketErrorEvent;
 import com.github.steveice10.packetlib.event.session.PacketReceivedEvent;
 import com.github.steveice10.packetlib.event.session.SessionAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.kyngs.pidoorsensor.client.Client;
 
-import static xyz.kyngs.pidoorsensor.client.Client.LOGGER;
-
 public class SessionListener extends SessionAdapter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SessionListener.class);
 
     private final Client client;
 

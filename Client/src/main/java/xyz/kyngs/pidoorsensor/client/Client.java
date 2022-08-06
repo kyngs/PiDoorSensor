@@ -1,13 +1,14 @@
 package xyz.kyngs.pidoorsensor.client;
 
-import xyz.kyngs.logger.LogBuilder;
-import xyz.kyngs.logger.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.kyngs.pidoorsensor.client.handlers.AudioHandler;
 import xyz.kyngs.pidoorsensor.client.handlers.NetworkHandler;
 
 public class Client {
 
-    public static final Logger LOGGER = LogBuilder.async().build();
+    private static final Logger LOGGER = LoggerFactory.getLogger(Client.class);
+
     private final NetworkHandler networkHandler;
     private final String address;
     private final AudioHandler audioHandler;
@@ -21,15 +22,15 @@ public class Client {
 
         audioHandler = new AudioHandler(this);
 
-        LOGGER.info("§aAudio handler initialized");
+        LOGGER.info("Audio handler initialized");
 
         LOGGER.info("Initializing network system");
 
         networkHandler = new NetworkHandler(this);
 
-        LOGGER.info("§aNetwork system initialized");
+        LOGGER.info("Network system initialized");
 
-        LOGGER.info("§aDoor sensor client started");
+        LOGGER.info("Door sensor client started");
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown, "Shutdown Hook"));
     }
@@ -59,17 +60,15 @@ public class Client {
 
         networkHandler.shutdown();
 
-        LOGGER.info("§aShutdown complete, goodbye");
-
-        LOGGER.destroy();
+        LOGGER.info("Shutdown complete, goodbye");
     }
 
     public void onDoorStatusChange(boolean status) {
         if (status) {
-            LOGGER.info("§aDoor opened");
+            LOGGER.info("Door opened");
             audioHandler.alert();
         } else {
-            LOGGER.info("§cDoor closed");
+            LOGGER.info("Door closed");
         }
     }
 

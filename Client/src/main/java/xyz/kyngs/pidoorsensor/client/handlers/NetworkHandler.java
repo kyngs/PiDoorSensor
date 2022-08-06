@@ -1,9 +1,13 @@
 package xyz.kyngs.pidoorsensor.client.handlers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.kyngs.pidoorsensor.client.Client;
 import xyz.kyngs.pidoorsensor.client.network.ReconnectableClient;
 
 public class NetworkHandler extends AbstractHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NetworkHandler.class);
 
     private final ReconnectableClient netClient;
 

@@ -3,6 +3,8 @@ package xyz.kyngs.pidoorsensor.client.network;
 import com.github.steveice10.packetlib.Session;
 import com.github.steveice10.packetlib.packet.Packet;
 import com.github.steveice10.packetlib.tcp.TcpClientSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.kyngs.pidoorsensor.client.Client;
 import xyz.kyngs.pidoorsensor.client.network.packets.CSPacketLeave;
 import xyz.kyngs.pidoorsensor.client.network.packets.CSPacketPing;
@@ -11,9 +13,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static xyz.kyngs.pidoorsensor.client.Client.LOGGER;
-
 public class ReconnectableClient {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReconnectableClient.class);
 
     private final AtomicReference<Session> session;
     private final AtomicReference<NetworkStatus> status;
@@ -50,6 +52,12 @@ public class ReconnectableClient {
                 while (!attemptConnect()) {
                     if (disconnecting) return;
                     LOGGER.warn("Failed to connect, trying again in 2 seconds");
+                    System.gc();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        return;
+                    }
                     attempt++;
                 }
 
