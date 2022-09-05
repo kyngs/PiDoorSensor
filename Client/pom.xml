@@ -6,7 +6,7 @@
 
     <groupId>xyz.kyngs.pidoorsensor</groupId>
     <artifactId>Client</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -83,9 +83,9 @@
             <version>2.1</version>
         </dependency>
         <dependency>
-            <groupId>com.github.kyngs</groupId>
-            <artifactId>Logger</artifactId>
-            <version>v1.8</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.11</version>
         </dependency>
     </dependencies>
 
